@@ -2,7 +2,7 @@ import './MenuItem.scss';
 
 type MenuItemType = {
   title: string;
-  data: string;
+  data: number;
   text: string;
 };
 

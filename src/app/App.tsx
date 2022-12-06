@@ -1,13 +1,9 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { AppHeader } from './components/Header/Header';
-
 import './App.scss';
-import { Sidebar } from './components/Sidebar/Sidebar';
-import { Workspace } from './components/Workspace/Workspace';
+import { AppHeader, Sidebar, Workspace } from '../components';
 
 export const App: React.FC = () => {
-
   return (
     <Layout className='app'>
       <AppHeader />
