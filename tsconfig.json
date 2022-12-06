@@ -31,7 +31,7 @@
     "vite.config.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/SimpleMde/demo/CustomPreview.jsx"  ],
   "exclude": [
     "node_modules"
   ]

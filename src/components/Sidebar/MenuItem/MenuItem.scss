@@ -1,0 +1,38 @@
+.menu-item {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+  padding: 20px 30px;
+
+  border-bottom: 1px solid var(--border-gray-color);
+
+  transition: 0.2s ease all;
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__text {
+    overflow: hidden !important;
+    display: flex;
+    gap: 10px;
+
+    width: 100%;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .data {
+      font-weight: 600;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(216 216 216);
+  }
+}
