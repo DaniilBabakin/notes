@@ -24,7 +24,7 @@ export const Workspace = () => {
     <Layout>
       <Content
         style={{
-          padding: 24,
+          padding: '30px 50px',
           margin: 0,
           minHeight: 280,
           background: 'var(--background-white)',

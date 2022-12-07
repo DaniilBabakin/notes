@@ -13,6 +13,7 @@
   transition: 0.2s ease all;
 
   &__title {
+    margin: 0;
     font-size: 16px;
     font-weight: 700;
   }
@@ -23,6 +24,8 @@
     gap: 10px;
 
     width: 100%;
+    min-height: 15px;
+    margin: 0;
 
     text-overflow: ellipsis;
     white-space: nowrap;
