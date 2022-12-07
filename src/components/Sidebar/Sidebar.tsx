@@ -1,25 +1,33 @@
-import React from 'react';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu } from 'antd';
 import { MenuItem } from './MenuItem/MenuItem';
+import { useContext } from 'react';
+import { Context } from 'app/context';
 const { Sider } = Layout;
 
-export const Sidebar: React.FC = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+export const Sidebar = () => {
+  const { notes, setCurrentNote, currentNote, searchQuery } = useContext(Context);
+  
+  const handleSetCurrentNote = (item: NotesDBType) => {
+    setCurrentNote(item);
+  };
 
   return (
-    <Sider width={'15vw'} style={{ background: colorBgContainer, borderRight: '1px solid var(--border-gray-color)' }}>
-      <Menu mode='inline' style={{ height: '100%', background: 'var(--background-sider)' }}>
-        <MenuItem
-          key={'523523523'}
-          title={'Продукты'}
-          text={'Майонез.Кетчуп.Майонез'}
-          data='12:07'
-        />
-        <MenuItem key={'gsdg'} title={'Продукты'} text={'Майонез.Кетчуп.Майонез'} data='12:07' />
-        <MenuItem key={'y45y4'} title={'Продукты'} text={'Майонез.Кетчуп.Майонез'} data='12:07' />
-        <MenuItem key={'hfgh'} title={'Продукты'} text={'Майонез.Кетчуп.Майонез'} data='12:07' />
+    <Sider width={'15vw'} style={{ borderRight: '1px solid var(--border-gray-color)' }}>
+      <Menu
+        mode='inline'
+        style={{ height: '100%', background: 'var(--background-sider)', overflow: 'auto' }}
+      >
+        {notes
+          .sort((a, b) => b.data - a.data)
+          .filter((item) => item.title.startsWith(searchQuery))
+          .map((item) => (
+            <MenuItem
+              item={item}
+              key={item.data}
+              handleClick={handleSetCurrentNote}
+              isCurrent={currentNote?.id === item.id}
+            />
+          ))}
       </Menu>
     </Sider>
   );

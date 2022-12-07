@@ -32,6 +32,10 @@
     }
   }
 
+  &.current {
+    background-color: rgb(216 216 216);
+  }
+
   &:hover {
     background-color: rgb(216 216 216);
   }

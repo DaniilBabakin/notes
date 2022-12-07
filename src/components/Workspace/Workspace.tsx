@@ -1,16 +1,24 @@
 import { Layout } from 'antd';
 import SimpleMdeReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext } from 'react';
 import Markdown from 'marked-react';
+import { Context } from 'app/context';
+import { updateNote } from 'utils/workWithDb';
 const { Content } = Layout;
-export const Workspace = () => {
-  const [editMode] = useState(false);
-  const [value, setValue] = useState('# Initial value');
 
-  const onChange = useCallback((value: string) => {
-    setValue(value);
-  }, []);
+export const Workspace = () => {
+  const { currentNote, setCurrentNote, editMode } = useContext(Context);
+
+  const onChange = useCallback(
+    (value: string) => {
+      if (currentNote) {
+        updateNote({ ...currentNote, text: value });
+        setCurrentNote({ ...currentNote, text: value });
+      }
+    },
+    [currentNote, setCurrentNote],
+  );
 
   return (
     <Layout>
@@ -22,11 +30,12 @@ export const Workspace = () => {
           background: 'var(--background-white)',
         }}
       >
-        {editMode ? (
-          <SimpleMdeReact value={value} onChange={onChange} />
-        ) : (
-          <Markdown value={value} />
-        )}
+        {currentNote &&
+          (editMode ? (
+            <SimpleMdeReact value={currentNote?.text} onChange={onChange} />
+          ) : (
+            <Markdown value={currentNote?.text} />
+          ))}
       </Content>
     </Layout>
   );

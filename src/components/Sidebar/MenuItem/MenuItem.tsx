@@ -1,19 +1,22 @@
+import { transformDate } from 'utils/transformDate';
 import './MenuItem.scss';
 
 type MenuItemType = {
-  title: string;
-  data: string;
-  text: string;
+  item: NotesDBType;
+  handleClick: (item: NotesDBType) => void;
+  isCurrent: boolean;
 };
 
-export const MenuItem = ({ title, data, text }: MenuItemType) => {
+export const MenuItem = ({ item, handleClick, isCurrent }: MenuItemType) => {
+  const transformedData = transformDate(item.data);
   return (
     <>
-      <li className='menu-item'>
-        <p className='menu-item__title'>{title}</p>
+      {/* eslint-disable-next-line */}
+      <li className={`menu-item ${isCurrent ? 'current' : ''}`} onClick={() => handleClick(item)}>
+        <p className='menu-item__title'>{item.title}</p>
         <p className='menu-item__text'>
-          <data className='data'>{data}</data>
-          {text}
+          <data className='data'>{transformedData}</data>
+          {item.text.length >= 25 ? item.text.substring(0, 25) + '...' : item.text}
         </p>
       </li>
     </>
